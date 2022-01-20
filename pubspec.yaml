@@ -35,8 +35,18 @@ flutter:
     - aniket-deole-M6XC789HLe8-unsplash.jpg
     - tomasz-smal-_HJNQCoXVkU-unsplash.png
     - v2osk-1Z2niiBPg5A-unsplash.png
+    - image1.jpg
+    - image2.jpg
+    - image3.jpg
+    - image4.jpg
+    - image5.jpg
+    - image6.jpg
+    - image7.jpg
+    - image8.jpg
+    - image9.jpg
 
-  # An image asset can refer to one or more resolution-specific "variants", see
+
+        # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
   # For details regarding adding assets from package dependencies, see

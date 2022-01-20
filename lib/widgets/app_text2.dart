@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class AppText extends StatelessWidget {
-  const AppText({Key? key, this.text, this.color, this.size=30,})
+  const AppText({Key? key, this.text, this.color, this.size=16,})
       : super(key: key);
   final String? text;
   final double? size;

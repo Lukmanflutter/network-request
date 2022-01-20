@@ -1,4 +1,5 @@
 import 'package:Lukman/widgets/app_text.dart';
+import 'package:Lukman/widgets/app_text2.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -12,10 +13,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
+    List itemBuilderTracking =List.generate(50, (indexdots) => Colors.white);
+    Map images = <dynamic, dynamic>{
+      "image1.jpg": "image1",
+      "image2.jpg": "image2",
+      "image3.jpg": "image3",
+      "image4.jpg": "image4",
+      "image5.jpg": "image5",
+      "image6.jpg": "image6",
+      "image7.jpg": "image7",
+      "image8.jpg": "image8",
+      "image9.jpg": "image9",
+    };
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -46,7 +59,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               height: 5,
             ),
             Align(
-              alignment: Alignment.centerLeft,
+              //alignment: Alignment.centerLeft,
               child: TabBar(
                 labelPadding: const EdgeInsets.only(left: 20, right: 20),
                 unselectedLabelColor: Colors.grey,
@@ -69,24 +82,106 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            SizedBox(
-              height: 300,
-              width: 200,
-              child: TabBarView(
-                controller: _tabController,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.green,
+            Container(
+              margin: const EdgeInsets.only(top: 5),
+              child: SizedBox(
+                height: 250,
+                width: 300,
+                child: TabBarView(
+                  controller: _tabController,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      child: ListView.builder(
+                        itemCount: 50,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context,int index){
+                            return Container(
+                              margin: const EdgeInsets.only(right: 15),
+                              height: 200,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.green,
+                              ),
+                            );
+                          }),
                     ),
-                  ),
-                  Text("hi"),
-                  Text("there"),
-
-                ],
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.cyan,
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const <Widget>[
+                AppLargeText(
+                  text: "Explore more",
+                  size: 22,
+                ),
+                AppText(
+                  text: "See more",
+                  color: Colors.blueGrey,
+                  size: 16,
+                ),
+              ],
+            ),
+            const SizedBox(height: 30,),
+            Container(
+              height: 120,
+               width: double.maxFinite,
+              color:Colors.white,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: images.length,
+                itemBuilder: (_, index) {
+                  return Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(
+                          right: 5,
+                        ),
+                        width: 80,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage(
+                              images.keys.elementAt(index),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 5),
+                        child: AppText(
+                          text: images.values.elementAt(index),
+                          size: 16,
+                        ),
+                      )
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
