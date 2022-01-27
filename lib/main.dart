@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:Lukman/nav_pages/main_nav_page.dart';
 import 'package:Lukman/screens/welcome_page/screen1.dart';
 main(){
 runApp(const myApp());

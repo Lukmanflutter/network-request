@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
   const AppText({Key? key, this.text, this.color, this.size=16,})

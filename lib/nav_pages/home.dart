@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:Lukman/widgets/app_text.dart';
 import 'package:Lukman/widgets/app_text2.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
-    List itemBuilderTracking =List.generate(50, (indexdots) => Colors.white);
     Map images = <dynamic, dynamic>{
       "image1.jpg": "image1",
       "image2.jpg": "image2",
@@ -25,6 +26,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       "image8.jpg": "image8",
       "image9.jpg": "image9",
     };
+    List itemBuilderTracking = List.generate(50, (index) {
+    var colors =Random().nextInt(16777215)+4278190080;
+      return Color(colors);
+    });
 
     return Scaffold(
       body: Padding(
@@ -96,16 +101,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         color: Colors.white,
                       ),
                       child: ListView.builder(
-                        itemCount: 50,
+                          itemCount: 50,
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context,int index){
+                          itemBuilder: (BuildContext context, int index) {
                             return Container(
                               margin: const EdgeInsets.only(right: 15),
                               height: 200,
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.green,
+                                color: itemBuilderTracking[index],
                               ),
                             );
                           }),
@@ -143,11 +148,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 ),
               ],
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Container(
               height: 120,
-               width: double.maxFinite,
-              color:Colors.white,
+              width: double.maxFinite,
+              color: Colors.white,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: images.length,
