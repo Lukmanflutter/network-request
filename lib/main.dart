@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:Lukman/screens/welcome_page/screen1.dart';
+//import 'package:Lukman/screens/welcome_page/screen1.dart';
+import 'package:lukman/screens/welcome_page/screen1.dart';
 main(){
-runApp(const myApp());
+runApp(const MyApp());
 }
-class myApp extends StatelessWidget {
-  const myApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

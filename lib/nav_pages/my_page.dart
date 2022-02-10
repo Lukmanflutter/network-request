@@ -1,8 +1,11 @@
-import 'package:Lukman/widgets/app_text.dart';
-import 'package:Lukman/widgets/app_text2.dart';
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:lukman/model/api_call.dart';
+import 'package:lukman/widgets/app_text.dart';
+import 'package:lukman/widgets/app_text2.dart';
+import 'package:http/http.dart' as http;
 
+// class that holds the widget tree
 class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
 
@@ -11,38 +14,82 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
+  List info=[];
+  // _initData(){
+  //   DefaultAssetBundle.of(context).loadString("model/info.json").then((value){
+  //    info= json.decode(value);
+  //   });
+  // }
+  // void iniState(){
+  //   super.initState();
+  //   _initData();
+  // }
+  late Future<StudentModel> studentModel;
+  @override
+  void initState(){
+    super.initState();
+    studentModel=getStudent();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children:   const <Widget>[
-            FirstRow(),
-           SizedBox(
+        child: ListView(
+          shrinkWrap: true,
+          children:  [
+             const FirstRow(),
+            const SizedBox(
               height: 20,
             ),
-            SecondRow(),
+            const SecondRow(),
+            const SizedBox(
+              height: 20,
+            ),
+            const ContainerStackWidget(),
+            const SizedBox(height: 20,),
+            const GirlContainer(),
+            const AppLargeText(text: "Area of Focus"),
+
             SizedBox(
-              height: 20,
+              height: 200,
+              child: ListView.builder(
+                itemCount: 4,
+                itemBuilder: ( _ , i){
+                  return Row(
+                    children:  [
+                      Container(
+                        padding:const EdgeInsets.only(bottom: 10),
+                        height: 200,
+                        width: 170,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            image: const DecorationImage(
+                              image:AssetImage("image4.jpg"),
+                            ),
+                          boxShadow:  [
+                            BoxShadow(blurRadius: 3,offset: const Offset(5,5),
+                            color: Colors.grey.withOpacity(0.1)),
+                            BoxShadow(blurRadius: 3,offset: const Offset(-5,-5),
+                                color: Colors.grey.withOpacity(0.1)),
+                          ]
+                        ),
+                        child: const Center(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: AppText(
+                                text: "glues",),
+                            )),
+                      )
+                    ],
+                  );
+                },
+              ),
             ),
-            ContainerStackWidget(),
-            SizedBox(height: 20,),
-            GirlContainer(),
-            AppLargeText(text: "Area of Focus"),
-            // Expanded(
-            //   child: ListView.builder(
-            //    itemBuilder: ( _ , i){
-            //      return Row(
-            //        children: [
-            //
-            //        ],
-            //      );
-            //    },
-            //   ),
-            // )
+            const SizedBox(height: 20,),
+            const HttpContainer()
+
           ],
         ),
       ),
@@ -193,7 +240,8 @@ class ContainerStackWidget extends StatelessWidget {
                   Icons.play_circle_fill,
                   size: 60,
                   color: Colors.white,
-                ))
+                ),
+                ),
               ],
             )
           ],
@@ -210,7 +258,7 @@ class GirlContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 180,
       width: MediaQuery.of(context).size.width,
       child: Stack(
@@ -235,4 +283,65 @@ class GirlContainer extends StatelessWidget {
     );
   }
 }
+
+
+
+//am using this container to track http request 
+
+class HttpContainer extends StatefulWidget {
+  const HttpContainer({Key? key}) : super(key: key);
+
+  @override
+  State<HttpContainer> createState() => _HttpContainerState();
+}
+
+class _HttpContainerState extends State<HttpContainer> {
+  late Future<StudentModel> studentModel;
+  @override
+  void initState(){
+    super.initState();
+    studentModel=getStudent();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<StudentModel>(
+      future: getStudent(),
+      builder: (context , snapshot){
+        if (snapshot.hasData){
+          StudentModel student = snapshot.data!;
+          return AppLargeText(text:"userId: ${student.userId}\n"
+              "id:${student.id}\n"
+              "title: ${student.title}");
+        }else if (snapshot.hasError){
+          dynamic student = snapshot.error;
+          return AppText(text: "$student".toString(),);
+        }else {
+          return const Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+}
+
+
+
+ Future <StudentModel> getStudent() async {
+   const  urlRepo= "https://jsonplaceholder.typicode.com/albums/1";
+   await Future.delayed(const Duration(seconds:5));
+  final response= await http.get(Uri.parse(urlRepo));
+  if(response.statusCode==200){
+    final  jsonStudent =json.decode(response.body);
+    print(jsonStudent);
+    return StudentModel.fromJason(jsonStudent);
+  }else {
+    throw Exception("try again later plus  stay on the the platform");
+  }
+
+}
+
+
+
+
+
+
 

@@ -1,7 +1,8 @@
-import 'package:Lukman/widgets/app_text.dart';
-import 'package:Lukman/widgets/app_text2.dart';
-import 'package:Lukman/widgets/responsive_button.dart';
+
 import 'package:flutter/material.dart';
+import 'package:lukman/widgets/app_text.dart';
+import 'package:lukman/widgets/app_text2.dart';
+import 'package:lukman/widgets/responsive_button.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({Key? key}) : super(key: key);

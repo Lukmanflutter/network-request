@@ -1,5 +1,6 @@
-import 'package:Lukman/widgets/app_text2.dart';
 import 'package:flutter/material.dart';
+
+import 'app_text2.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton(

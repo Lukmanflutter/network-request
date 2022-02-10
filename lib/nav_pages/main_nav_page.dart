@@ -1,8 +1,9 @@
-import 'package:Lukman/nav_pages/bar_item.dart';
-import 'package:Lukman/nav_pages/home.dart';
-import 'package:Lukman/nav_pages/my_page.dart';
-import 'package:Lukman/nav_pages/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:lukman/nav_pages/search_page.dart';
+
+import 'bar_item.dart';
+import 'home.dart';
+import 'my_page.dart';
 
 class MyNavPge extends StatefulWidget {
   const MyNavPge({Key? key}) : super(key: key);

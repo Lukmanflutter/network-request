@@ -1,7 +1,7 @@
-import 'package:Lukman/widgets/app_button.dart';
-import 'package:Lukman/widgets/app_text.dart';
-import 'package:Lukman/widgets/app_text2.dart';
 import 'package:flutter/material.dart';
+import 'package:lukman/widgets/app_button.dart';
+import 'package:lukman/widgets/app_text.dart';
+import 'package:lukman/widgets/app_text2.dart';
 
 class BarItemPage extends StatefulWidget {
   const BarItemPage({Key? key}) : super(key: key);
