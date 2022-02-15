@@ -46,13 +46,14 @@ class _MyNavPgeState extends State<MyNavPge> {
         elevation: 0,
         currentIndex: index,
         items: const [
-          BottomNavigationBarItem(title: Text("Home"), icon: Icon(Icons.apps)),
           BottomNavigationBarItem(
-              title: Text("Bar"), icon: Icon(Icons.bar_chart_sharp)),
+              label: ("Home"), icon: Icon(Icons.apps)),
           BottomNavigationBarItem(
-              title: Text("Search"), icon: Icon(Icons.search)),
+              label: "Bar", icon: Icon(Icons.bar_chart_sharp)),
           BottomNavigationBarItem(
-              title: Text("personal"), icon: Icon(Icons.person)),
+              label: ("Search"), icon: Icon(Icons.search)),
+          BottomNavigationBarItem(
+              label:("personal"), icon: Icon(Icons.person)),
         ],
       ),
     );

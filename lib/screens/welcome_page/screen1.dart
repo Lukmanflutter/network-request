@@ -36,8 +36,6 @@ class _State extends State<Screen1> {
         itemCount: images.length,
         itemBuilder: (_, index) {
           return Container(
-            width: double.maxFinite,
-            height: double.maxFinite,
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
@@ -45,58 +43,60 @@ class _State extends State<Screen1> {
                   ),
                   fit: BoxFit.cover),
             ),
-            child: Container(
-              margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
-              child: SafeArea(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const AppLargeText(
-                          text: "Trips",
-                        ),
-                        const AppText(
-                          text: "Mountain",
-                          size: 30,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          width: 250,
-                          child: AppText(
-                            text: texts[index],
-                            size: 14,
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
+                child: SafeArea(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const AppLargeText(
+                            text: "Trips",
                           ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        ResponsiveButton(
-                          width: 120,
-                          goToNavPage: (){
-                           goToNavBarPages(context);
-                          }
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: List.generate(3, (indexdots) {
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 5),
-                          width: 8,
-                          height: index == indexdots ? 25 : 8,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: index == indexdots
-                                  ? Colors.blue
-                                  : Colors.red.withOpacity(0.3)),
-                        );
-                      }),
-                    )
-                  ],
+                          const AppText(
+                            text: "Mountain",
+                            size: 30,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SizedBox(
+                            width: 250,
+                            child: AppText(
+                              text: texts[index],
+                              size: 14,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          ResponsiveButton(
+                            width: 120,
+                            goToNavPage: (){
+                             goToNavBarPages(context);
+                            }
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: List.generate(3, (indexdots) {
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 5),
+                            width: 8,
+                            height: index == indexdots ? 25 : 8,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: index == indexdots
+                                    ? Colors.blue
+                                    : Colors.red.withOpacity(0.3)),
+                          );
+                        }),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
