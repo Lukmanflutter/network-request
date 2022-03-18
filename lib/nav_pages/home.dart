@@ -209,7 +209,6 @@ class CircleTabIndicator extends Decoration {
     return _CirclePainter(color: color, radius: radius);
   }
 }
-
 class _CirclePainter extends BoxPainter {
   _CirclePainter({required this.color, required this.radius});
   final Color color;

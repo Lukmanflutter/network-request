@@ -14,7 +14,7 @@ class MyPage extends StatefulWidget {
 }
 
 class _MyPageState extends State<MyPage> {
-  List info=[];
+  //List info=[];
   // _initData(){
   //   DefaultAssetBundle.of(context).loadString("model/info.json").then((value){
   //    info= json.decode(value);
@@ -28,7 +28,7 @@ class _MyPageState extends State<MyPage> {
   @override
   void initState(){
     super.initState();
-    studentModel=getStudent();
+    studentModel=getStudent("https://jsonplaceholder.typicode.com/albums/1");
   }
   @override
   Widget build(BuildContext context) {
@@ -37,58 +37,58 @@ class _MyPageState extends State<MyPage> {
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: ListView(
           shrinkWrap: true,
-          children:  [
-             const FirstRow(),
-            const SizedBox(
-              height: 20,
-            ),
-            const SecondRow(),
-            const SizedBox(
-              height: 20,
-            ),
-            const ContainerStackWidget(),
-            const SizedBox(height: 20,),
-            const GirlContainer(),
-            const AppLargeText(text: "Area of Focus"),
-
+          children:  const [
+             FirstRow(),
             SizedBox(
-              height: 200,
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: ( _ , i){
-                  return Row(
-                    children:  [
-                      Container(
-                        padding:const EdgeInsets.only(bottom: 10),
-                        height: 200,
-                        width: 170,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                              image:AssetImage("image4.jpg"),
-                            ),
-                          boxShadow:  [
-                            BoxShadow(blurRadius: 3,offset: const Offset(5,5),
-                            color: Colors.grey.withOpacity(0.1)),
-                            BoxShadow(blurRadius: 3,offset: const Offset(-5,-5),
-                                color: Colors.grey.withOpacity(0.1)),
-                          ]
-                        ),
-                        child: const Center(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: AppText(
-                                text: "glues",),
-                            )),
-                      )
-                    ],
-                  );
-                },
-              ),
+              height: 20,
             ),
-            const SizedBox(height: 20,),
-            const HttpContainer()
+            SecondRow(),
+            SizedBox(
+              height: 20,
+            ),
+            ContainerStackWidget(),
+            SizedBox(height: 20,),
+            GirlContainer(),
+            AppLargeText(text: "Area of Focus"),
+
+            // SizedBox(
+            //   height: 200,
+            //   child: ListView.builder(
+            //     itemCount: 4,
+            //     itemBuilder: ( _ , i){
+            //       return Row(
+            //         children:  [
+            //           Container(
+            //             padding:const EdgeInsets.only(bottom: 10),
+            //             height: 200,
+            //             width: 170,
+            //             decoration: BoxDecoration(
+            //               color: Colors.white,
+            //                 borderRadius: BorderRadius.circular(15),
+            //                 image: const DecorationImage(
+            //                   image:AssetImage("image4.jpg"),
+            //                 ),
+            //               boxShadow:  [
+            //                 BoxShadow(blurRadius: 3,offset: const Offset(5,5),
+            //                 color: Colors.grey.withOpacity(0.1)),
+            //                 BoxShadow(blurRadius: 3,offset: const Offset(-5,-5),
+            //                     color: Colors.grey.withOpacity(0.1)),
+            //               ]
+            //             ),
+            //             child: const Center(
+            //                 child: Align(
+            //                   alignment: Alignment.bottomCenter,
+            //                   child: AppText(
+            //                     text: "glues",),
+            //                 )),
+            //           )
+            //         ],
+            //       );
+            //     },
+            //   ),
+            // ),
+            SizedBox(height: 20,),
+            HttpContainer()
 
           ],
         ),
@@ -265,7 +265,7 @@ class GirlContainer extends StatelessWidget {
         children:<Widget> [
           Container(
             height: 120,
-            width: MediaQuery.of(context).size.width ,
+            width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
               color: Colors.red,
               boxShadow: [
@@ -300,23 +300,24 @@ class _HttpContainerState extends State<HttpContainer> {
   @override
   void initState(){
     super.initState();
-    studentModel=getStudent();
+    studentModel=getStudent("https://jsonplaceholder.typicode.com/albums/1");
   }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<StudentModel>(
-      future: getStudent(),
-      builder: (context , snapshot){
+      future:getStudent("https://jsonplaceholder.typicode.com/albums/1"),
+      builder: (context, snapshot){
         if (snapshot.hasData){
           StudentModel student = snapshot.data!;
-          return AppLargeText(text:"userId: ${student.userId}\n"
+          return AppLargeText(text:"userId: ${student.userId}"
               "id:${student.id}\n"
               "title: ${student.title}");
         }else if (snapshot.hasError){
           dynamic student = snapshot.error;
           return AppText(text: "$student".toString(),);
         }else {
-          return const Center(child: CircularProgressIndicator());
+         // return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(),);
         }
       },
     );
@@ -324,14 +325,13 @@ class _HttpContainerState extends State<HttpContainer> {
 }
 
 
-
- Future <StudentModel> getStudent() async {
-   const  urlRepo= "https://jsonplaceholder.typicode.com/albums/1";
-   await Future.delayed(const Duration(seconds:5));
-  final response= await http.get(Uri.parse(urlRepo));
-  if(response.statusCode==200){
+/// function for getting the student model from the back end
+ Future <StudentModel> getStudent(String url) async {
+       var urlRepo=url;
+   //await Future.delayed(const Duration(seconds:5));
+   final response = await http.get(Uri.parse(urlRepo));
+    if(response.statusCode==200){
     final  jsonStudent =json.decode(response.body);
-    print(jsonStudent);
     return StudentModel.fromJason(jsonStudent);
   }else {
     throw Exception("try again later plus  stay on the the platform");

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lukman/nav_pages/search_page.dart';
+import 'package:lukman/nav_pages/sign_in_page.dart';
 
 import 'bar_item.dart';
 import 'home.dart';
@@ -16,7 +16,7 @@ class _MyNavPgeState extends State<MyNavPge> {
   final List pages = const [
     Home(),
     BarItemPage(),
-    Search(),
+    SignIn(),
     MyPage(),
   ];
   int currentIndex = 0;

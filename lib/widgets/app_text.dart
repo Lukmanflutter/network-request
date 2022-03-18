@@ -15,7 +15,7 @@ class AppLargeText extends StatelessWidget {
       style: TextStyle(color: color,
       fontSize: size,
           fontWeight: FontWeight.bold,
-        fontFamily:"Comforter-Regular",
+        //fontFamily:"Comforter-Regular",
       ),
     );
   }
