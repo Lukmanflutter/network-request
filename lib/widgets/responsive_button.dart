@@ -36,7 +36,7 @@ class ResponsiveButton extends StatelessWidget {
   }
 }
 
-void goToNavBarPages(BuildContext context) {
+ goToNavBarPages(BuildContext context) {
   final _route = MaterialPageRoute(builder: (context) {
     return  const MyNavPge();
   });

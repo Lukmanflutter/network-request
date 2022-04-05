@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:lukman/model/user_model.dart';
@@ -18,45 +19,57 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children:[
-        TextField(
-          controller: nameController,
-        ),
-        TextField(
-          controller: jobController,
-        ),
-        const SizedBox(
-          height: 30.0,
-        ),
-        const SizedBox(
-          height: 30.0,
-        ),
-       // _user == null
-       //      ? Container():
-        MaterialButton(
-          onPressed: () async {
-            final String name = nameController.text;
-            final String jobTittle = jobController.text;
-            final UserModel? user = await createUser(name, jobTittle);
-            setState(() {
-              _user = user;
-            });
-            if (_user==null){
-              return;
-            }else{
-               // ScaffoldMessenger.of(context).showSnackBar( SnackBar(
-               //    content: Text('the user ${_user?.name}and ${_user?.id}is created successfully at time')));
-              // var v = Get.rawSnackbar( 'the user ${_user?.name}and ${_user?.id}is created successfully at time',
-              //     snackPosition:SnackPosition.BOTTOM);
-             Get.snackbar("",
-                 "'the user ${_user?.name}and ${_user?.id} and ${_user?.job}is created successfully at time'",
-             snackPosition: SnackPosition.BOTTOM,duration: const Duration(seconds: 1));
-            }
-          },
-          child: const Text("Sign in"),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        children:[
+          TextField(
+            controller: nameController,
+              decoration: const InputDecoration(
+             labelText: "Name",
+                  border: OutlineInputBorder()
+              ),
+          ),
+          const SizedBox(height: 20.0,),
+          TextFormField(
+            controller: jobController,
+              decoration: const InputDecoration(
+                labelText: "Job title",
+                border: OutlineInputBorder()
+              ),
+          ),
+          const SizedBox(
+            height: 30.0,
+          ),
+          const SizedBox(
+            height: 30.0,
+          ),
+         // _user == null
+         //      ? Container():
+          MaterialButton(
+            onPressed: () async {
+              final String name = nameController.text;
+              final String jobTittle = jobController.text;
+              final UserModel? user = await createUser(name, jobTittle, );
+              setState(() {
+                _user = user;
+              });
+              if (_user==null){
+                return;
+              }else{
+                 // ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                 //    content: Text('the user ${_user?.name}and ${_user?.id}is created successfully at time')));
+                // var v = Get.rawSnackbar( 'the user ${_user?.name}and ${_user?.id}is created successfully at time',
+                //     snackPosition:SnackPosition.BOTTOM);
+               Get.snackbar("",
+                   "'the user ${_user?.name}and ${_user?.id} and ${_user?.job}is created successfully at time${_user?.createdAt}'",
+               snackPosition: SnackPosition.BOTTOM,duration: const Duration(seconds: 5));
+              }
+            },
+            child: const Text("Sign in"),
+          )
+        ],
+      ),
     );
   }
 }
