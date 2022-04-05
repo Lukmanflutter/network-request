@@ -149,8 +149,9 @@ class _BarDetailPageState extends State<BarItemPage> {
                                       ? Colors.black
                                       : Colors.blueGrey,
                                   borderColor: selectedIndex == index
-                                      ? Colors.blueAccent
-                                      : Colors.blueAccent),
+                                      ? Colors.red
+                                      : Colors.blueAccent
+                              ),
                             ),
                           );
                         }),
@@ -167,7 +168,7 @@ class _BarDetailPageState extends State<BarItemPage> {
                         height: 5,
                       ),
                       AppText(
-                        size: 16,
+                        size: 16.0,
                         color: Colors.black.withOpacity(0.6),
                         text: "Yesomite National Park is located in central "
                             "Sierra Nevada in the US state of California. it "
@@ -185,7 +186,8 @@ class _BarDetailPageState extends State<BarItemPage> {
   }
 }
 
-// widget that holds the icon button at the top of the screen
+// widget that holds the icon button at the top of the screen, it is instanciated
+//on the widget tree.
 class FirstRow extends StatelessWidget {
   const FirstRow({Key? key, required this.firstIcon, required this.secondIcon})
       : super(key: key);

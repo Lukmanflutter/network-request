@@ -6,6 +6,6 @@ class StudentModel {
   
   factory StudentModel.fromJason(Map <String, dynamic> json){
    return StudentModel(userId:json["userId"],id:json["id"],
-   title:json["title"]);
+   title:json["title"]);  
   }
 }
