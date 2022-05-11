@@ -81,8 +81,8 @@ class _SignInState extends State<SignIn> {
                     nameController.text = "";
                     jobController.text = "";
                   });
-                  Get.snackbar("",
-                      "'the user ${_user?.name}and ${_user?.id} "
+                  Get.snackbar("success",
+                      "the user ${_user?.name}and ${_user?.id} "
                           "and ${_user?.job}is created successfully at time${_user?.createdAt}'",
                       snackPosition: SnackPosition.BOTTOM,
                       duration: const Duration(seconds:2),

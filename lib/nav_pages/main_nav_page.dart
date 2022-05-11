@@ -44,7 +44,7 @@ class _MyNavPgeState extends State<MyNavPge> {
         showUnselectedLabels: false,
         onTap: onTap,
         elevation: 0,
-        currentIndex: index,
+        currentIndex: currentIndex,
         items: const [
           BottomNavigationBarItem(
               label: ("Home"), icon: Icon(Icons.apps)),
